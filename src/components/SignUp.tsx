@@ -1,5 +1,6 @@
 import Input from './ui/Input'
 import Button from './ui/Button'
+import { Link } from 'react-router'
 
 const SignUp = () => {
   return (
@@ -22,7 +23,7 @@ const SignUp = () => {
           <Button variant="primary" text="Create an account" size="md" onClick={() => {}}/>
         </div>
       </div>
-      <p className='mt-2'>Already have an account? <span className='text-blue-700 cursor-pointer hover:underline'>Sign in</span></p>
+      <p className='mt-2'>Already have an account? <span className='text-blue-700 cursor-pointer hover:underline'><Link to="/signin">Sign in</Link></span></p>
     </div>
   )
 }

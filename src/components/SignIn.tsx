@@ -1,5 +1,6 @@
 import Input from './ui/Input'
 import Button from './ui/Button'
+import { Link } from 'react-router'
 
 const SignIn = () => {
   return (
@@ -16,7 +17,7 @@ const SignIn = () => {
           <Button variant="primary" text="Log in" size="md" onClick={() => {}}/>
         </div>
       </div>
-      <p className='mt-2'>Don't have an account yet? <span className='text-blue-700 cursor-pointer hover:underline'>Sign up</span></p>
+      <p className='mt-2'>Don't have an account yet? <span className='text-blue-700 cursor-pointer hover:underline'><Link to="/">Sign up</Link></span></p>
     </div>
   )
 }
