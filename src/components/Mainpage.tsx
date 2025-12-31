@@ -1,63 +1,42 @@
+import { useEffect, useState } from 'react'
 import Header from './Header'
 import Card from './ui/Card'
+import axios from 'axios';
+import { BACKEND_URL } from '@/config';
+import AddContentModal from './AddContentModal';
+import useModalStore from '../store/useModalStore'
 
-const contents = [
-    {
-        "id": 1,
-        "title": "gift guide for parents",
-        "link": "https://www.cosmopolitan.com/lifestyle/g38393456/gift-ideas-for-parents/",
-        "description": "gift guide for you parents so that you dont have to think a lot about it.",
-        "tags": []
-    },
-    {
-        "id": 2,
-        "title": "clash of clans th10 attack strategy",
-        "link": "https://www.coc.com",
-        "description": "different attack strategy for th10",
-        "tags": []
-    },
-    {
-        "id": 3,
-        "title": "clash of clans th10 attack strategy",
-        "link": "https://www.coc.com",
-        "description": "different attack strategy for th10",
-        "tags": []
-    },
-    {
-        "id": 4,
-        "title": "clash of clans th10 attack strategy",
-        "link": "https://www.coc.com",
-        "description": "different attack strategy for th10",
-        "tags": []
-    },
-    {
-        "id": 5,
-        "title": "clash of clans th10 attack strategy",
-        "link": "https://www.coc.com",
-        "description": "different attack strategy for th10",
-        "tags": []
-    },
-    {
-        "id": 6,
-        "title": "clash of clans th10 attack strategy",
-        "link": "https://www.coc.com",
-        "description": "different attack strategy for th10",
-        "tags": []
-    }
-]
+const Mainpage = () => {
+  const [contents, setContents] = useState<any[]>([]);
 
-const contentGrid = contents.map(c => {
-    return (
+  const authorization = localStorage.getItem("authorization")
+
+  const getContent = async () => {
+    const res = await axios.get(`${BACKEND_URL}/api/v1/content`, {
+        headers: {
+            authorization: authorization
+        }
+    })
+
+    setContents(res.data.content);
+  }
+
+  useEffect(() => {
+    getContent();
+  }, []);
+
+  const contentGrid = contents.map(c => {
+    return(
         <Card
-            key={c.id}
+            key={c._id}
             title={c.title}
             link={c.link}
             description={c.description}
         />
     )
-})
+  })
 
-const Mainpage = () => {
+  const isOpen = useModalStore((state) => state.isOpen);
 
   return (
     <div className='relative'>
@@ -69,7 +48,7 @@ const Mainpage = () => {
             contentGrid
         )}
       </div>
-      
+      {isOpen && <AddContentModal onContentAdded={getContent} />}
     </div>
   )
 }

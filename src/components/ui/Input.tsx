@@ -2,7 +2,7 @@
 interface InputProps {
     type: "text" | "email" | "password",
     placeholder: string,
-    onChange?: () => void,
+    onChange?: (e: any) => void,
 }
 
 <input type="text" placeholder="Title" className="border border-gray-300 p-2 rounded-md outline-none w-full mb-5"/>

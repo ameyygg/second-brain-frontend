@@ -1,6 +1,14 @@
 import { House, Link2, LogOut, Repeat2, Settings, Youtube } from 'lucide-react'
+import { useNavigate } from 'react-router';
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+  
+  const logout = () => {
+    localStorage.removeItem("authorization");
+    navigate('/signin');
+  }
+
   return (
     <div className='h-screen w-2xs bg-neutral-100 flex flex-col'>
       <div className='h-20 border-b border-gray-300 flex items-center'>
@@ -24,16 +32,16 @@ const Sidebar = () => {
             <p>Videos</p>
         </div>
       </div>
-        <div className="border-t border-gray-300 px-4 py-4 space-y-1">
-            <div className='text-md py-1.5 px-3 rounded-md hover:bg-neutral-300 text-gray-700 flex items-center gap-2 mb-2 cursor-pointer'>
-                <Settings size={18}/>
-                <p>Settings</p>
-            </div>
-            <div className='text-md py-1.5 px-3 rounded-md hover:bg-neutral-300 text-gray-700 flex items-center gap-2 mb-2 cursor-pointer'>
-                <LogOut size={18}/>
-                <p>Logout</p>
-            </div>
-        </div>
+      <div className="border-t border-gray-300 px-4 py-4 space-y-1">
+          <div className='text-md py-1.5 px-3 rounded-md hover:bg-neutral-300 text-gray-700 flex items-center gap-2 mb-2 cursor-pointer'>
+              <Settings size={18}/>
+              <p>Settings</p>
+          </div>
+          <div className='text-md py-1.5 px-3 rounded-md hover:bg-neutral-300 text-gray-700 flex items-center gap-2 mb-2 cursor-pointer' onClick={logout}>
+              <LogOut size={18}/>
+              <p>Logout</p>
+          </div>
+      </div>
     </div>
   )
 }
